@@ -1,26 +1,28 @@
+import 'package:baridx_order_creation/core/resources/app_theme.dart';
+import 'package:baridx_order_creation/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  return SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  ).then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Order Creation',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            "Order Creation",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-      ),
+      theme: AppTheme.appTheme,
+      routerConfig: router,
     );
   }
 }
