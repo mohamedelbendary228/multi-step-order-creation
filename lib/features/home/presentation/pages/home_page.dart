@@ -1,3 +1,6 @@
+import 'package:baridx_order_creation/core/resources/app_colors.dart';
+import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
+import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,11 +9,32 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Order Creation",
-          style: Theme.of(context).textTheme.titleLarge,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.add,
+          color: AppColors.primaryColor,
         ),
+      ),
+      body: const Column(
+        children: [
+          AppHeader(text: "Orders"),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: AppDefaultText(
+                    "You haven't any orders yet",
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.naturalDarkGray,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
