@@ -20,7 +20,7 @@ class AppDefaultText extends StatelessWidget {
     super.key,
     this.fontWeight = FontWeight.w300,
     this.color = AppColors.blackColor,
-    this.fontSize = 22,
+    this.fontSize = 16,
     this.overflow,
     this.height,
     this.textAlign,

@@ -1,7 +1,9 @@
 import 'package:baridx_order_creation/core/resources/app_theme.dart';
 import 'package:baridx_order_creation/routes/router.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -26,8 +28,23 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'Order Creation',
             debugShowCheckedModeBanner: false,
+            builder: (context, widget) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(1.5),
+                ),
+                child: widget!,
+              );
+            },
             theme: AppTheme.appTheme,
             routerConfig: router,
+            locale: const Locale("en"),
+            localizationsDelegates: const [
+              CountryLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
           );
         });
   }

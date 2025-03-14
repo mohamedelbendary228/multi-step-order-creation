@@ -1,7 +1,9 @@
 import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
 import 'package:baridx_order_creation/core/widgets/app_headr.dart';
+import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +12,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.push(Routes.customerInfo);
+        },
         backgroundColor: Colors.white,
         child: const Icon(
           Icons.add,
