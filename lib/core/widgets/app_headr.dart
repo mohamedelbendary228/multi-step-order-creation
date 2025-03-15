@@ -28,7 +28,7 @@ class AppHeader extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (hasBackButton)
                   InkWell(

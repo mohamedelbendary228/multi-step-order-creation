@@ -73,6 +73,7 @@ class AppTextField extends StatelessWidget {
         fontWeight: FontWeight.w500,
         fontSize: 12.sp,
       ),
+      cursorHeight: 20.0,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
           horizontal: 8,
@@ -83,11 +84,11 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: const Color(0xFFA3A3A3),
-          fontSize: 8.sp,
+          fontSize: 10.sp,
           fontFamily: "Cairo",
         ),
         errorStyle: TextStyle(
-          fontSize: 8.sp,
+          fontSize: 10.sp,
           fontFamily: "Cairo",
         ),
         filled: true,

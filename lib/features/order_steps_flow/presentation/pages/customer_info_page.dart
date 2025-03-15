@@ -6,8 +6,10 @@ import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/app_text_field.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
 import 'package:baridx_order_creation/core/widgets/text_field_label.dart';
+import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomerInfoPage extends StatefulWidget {
   const CustomerInfoPage({super.key});
@@ -60,6 +62,13 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
         });
       },
     );
+  }
+
+  void submitCustomerInfo() {
+    final isValid = formKey.currentState?.validate();
+    if (isValid ?? false) {
+      context.push(Routes.packageDetails);
+    }
   }
 
   @override
@@ -146,7 +155,7 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: MainButton(
               text: "Next",
-              onTap: () {},
+              onTap: submitCustomerInfo,
             ),
           ),
           const SizedBox(height: Dimensions.padding35Px),

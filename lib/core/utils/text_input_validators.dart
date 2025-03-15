@@ -7,6 +7,19 @@ class TextInputValidators {
     }
   }
 
+  static String? weightValidation(String value) {
+    String pattern = r'^\d+(\.\d{1,3})?$';
+    final RegExp regExp = RegExp(pattern);
+
+    if (value.trim().isEmpty) {
+      return "Weight filed is required";
+    } else if (!regExp.hasMatch(value)) {
+      return "Numbers only";
+    } else {
+      return null;
+    }
+  }
+
   static String? addressValidation(String value) {
     if (value.trim().isEmpty) {
       return "Address is required";
