@@ -67,6 +67,7 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
   void submitCustomerInfo() {
     final isValid = formKey.currentState?.validate();
     if (isValid ?? false) {
+      /// TODO: save customer info later when implement bloc logic
       context.push(Routes.packageDetails);
     }
   }

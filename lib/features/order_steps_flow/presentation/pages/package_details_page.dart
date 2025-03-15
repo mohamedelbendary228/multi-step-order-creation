@@ -6,9 +6,11 @@ import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/app_text_field.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
 import 'package:baridx_order_creation/core/widgets/text_field_label.dart';
+import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class PackageDetailsPage extends StatefulWidget {
   const PackageDetailsPage({super.key});
@@ -34,8 +36,10 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
   void submitPackageDetails() {
     final isValid = formKey.currentState?.validate();
     if ((isValid ?? false) && _selectedPackageType != null) {
+      /// TODO: save package details later when implement bloc logic
+      context.push(Routes.payment);
     } else if (_selectedPackageType == null) {
-      showToast(message: "Please select package type");
+      showToast(message: "Please select a package type");
     }
   }
 

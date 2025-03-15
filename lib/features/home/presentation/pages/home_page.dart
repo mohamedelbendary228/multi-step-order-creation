@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.push(Routes.customerInfo);
+          context.push(Routes.payment);
         },
         backgroundColor: Colors.white,
         child: const Icon(
