@@ -107,7 +107,17 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
                       validator: (value) => TextInputValidators.weightValidation(value!),
                     ),
                     const SizedBox(height: Dimensions.padding25Px),
-                    const TextFieldLabel("Notes"),
+                    const Row(
+                      children: [
+                        TextFieldLabel("Notes"),
+                        SizedBox(width: 5),
+                        TextFieldLabel(
+                          "(Optional)",
+                          fontSize: 10,
+                          color: AppColors.darkGray,
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: Dimensions.padding5Px),
                     AppTextField(
                       controller: notesController,
