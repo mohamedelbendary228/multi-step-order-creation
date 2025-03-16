@@ -7,19 +7,21 @@ class TextFieldLabel extends StatelessWidget {
   final String text;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final Color? color;
 
   const TextFieldLabel(
     this.text, {
     super.key,
     this.fontSize,
     this.fontWeight,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppDefaultText(
       text,
-      color: AppColors.blackColor,
+      color: color ?? AppColors.blackColor,
       fontSize: fontSize?.sp ?? 12.sp,
       fontWeight: fontWeight ?? FontWeight.w500,
     );

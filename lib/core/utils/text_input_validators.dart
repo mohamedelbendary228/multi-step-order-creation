@@ -39,7 +39,7 @@ class TextInputValidators {
   }
 
   static String? phoneValidation(String value) {
-    const String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    const String pattern = r'^(\+?\d{1,4})?[\s-]?(\d{3})[\s-]?(\d{3})[\s-]?(\d{4})$';
     final RegExp regExp = RegExp(pattern);
     if (value.trim().isEmpty) {
       return "Phone number is required";

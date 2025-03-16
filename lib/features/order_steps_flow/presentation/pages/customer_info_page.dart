@@ -1,13 +1,10 @@
 import 'package:baridx_order_creation/core/constants/dimensions.dart';
-import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/utils/text_input_validators.dart';
-import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
 import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/app_text_field.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
 import 'package:baridx_order_creation/core/widgets/text_field_label.dart';
 import 'package:baridx_order_creation/routes/routes.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,44 +21,12 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
-  //* initialize default country
-  Country selectedCountry = Country(
-    phoneCode: '966',
-    countryCode: 'SA',
-    e164Sc: 0,
-    geographic: true,
-    level: 1,
-    name: 'Saudi Arabia',
-    example: '500123456',
-    displayName: 'Saudi Arabia (SA) [+966]',
-    displayNameNoCountryCode: 'Saudi Arabia (SA)',
-    e164Key: '966-SA-0',
-  );
-
   @override
   void dispose() {
     nameController.dispose();
     phoneController.dispose();
     addressController.dispose();
     super.dispose();
-  }
-
-  void pickCountry() {
-    showCountryPicker(
-      context: context,
-      countryListTheme: CountryListThemeData(
-        bottomSheetHeight: MediaQuery.of(context).size.height * 0.8,
-        borderRadius: const BorderRadius.horizontal(
-          left: Radius.circular(20),
-          right: Radius.circular(20),
-        ),
-      ),
-      onSelect: (Country country) {
-        setState(() {
-          selectedCountry = country;
-        });
-      },
-    );
   }
 
   void submitCustomerInfo() {
@@ -101,40 +66,11 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
                       const SizedBox(height: Dimensions.padding25Px),
                       const TextFieldLabel("Phone Number"),
                       const SizedBox(height: Dimensions.padding5Px),
-                      SizedBox(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: AppTextField(
-                                controller: phoneController,
-                                keyboardType: TextInputType.phone,
-                                validator: (value) => TextInputValidators.phoneValidation(value!),
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            InkWell(
-                              onTap: pickCountry,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
-                                height: 48,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: AppColors.naturalGray),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(8),
-                                  ),
-                                ),
-                                child: AppDefaultText(
-                                  "${selectedCountry.flagEmoji}"
-                                  "  +${selectedCountry.phoneCode}",
-                                  fontSize: Dimensions.fontSize14Px,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      AppTextField(
+                        controller: phoneController,
+                        keyboardType: TextInputType.phone,
+                        validator: (value) => TextInputValidators.phoneValidation(value!),
+                        hintText: "(e.g., +20 10*********)",
                       ),
                       const SizedBox(height: Dimensions.padding25Px),
                       const TextFieldLabel("Address"),
