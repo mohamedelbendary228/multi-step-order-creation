@@ -7,6 +7,16 @@ class TextInputValidators {
     }
   }
 
+  static String? cardNumberValidation(String value) {
+    if (value.trim().isEmpty) {
+      return "Card Number filed is required";
+    } else if (value.trim().length < 19) {
+      return "Card Number is not valid";
+    } else {
+      return null;
+    }
+  }
+
   static String? weightValidation(String value) {
     String pattern = r'^\d+(\.\d{1,3})?$';
     final RegExp regExp = RegExp(pattern);
