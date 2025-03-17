@@ -1,7 +1,7 @@
 import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/order.dart';
 
 class OrderModel extends OrderEntity {
-  OrderModel({
+  const OrderModel({
     required super.customerName,
     required super.phoneNumber,
     required super.address,

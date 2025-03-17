@@ -10,6 +10,7 @@ class MainButton extends StatelessWidget {
   final Color? textColor;
   final VoidCallback? onTap;
   final double? fontSize;
+  final Widget? loadingWidget;
 
   const MainButton({
     super.key,
@@ -19,6 +20,7 @@ class MainButton extends StatelessWidget {
     this.textColor,
     this.onTap,
     this.fontSize,
+    this.loadingWidget,
   });
 
   @override
@@ -38,12 +40,13 @@ class MainButton extends StatelessWidget {
             color: borderColor ?? AppColors.primaryColor,
           ),
         ),
-        child: AppDefaultText(
-          text,
-          color: textColor ?? Colors.white,
-          fontWeight: FontWeight.w600,
-          fontSize: fontSize ?? Dimensions.fontSize14Px,
-        ),
+        child: loadingWidget ??
+            AppDefaultText(
+              text,
+              color: textColor ?? Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: fontSize ?? Dimensions.fontSize14Px,
+            ),
       ),
     );
   }

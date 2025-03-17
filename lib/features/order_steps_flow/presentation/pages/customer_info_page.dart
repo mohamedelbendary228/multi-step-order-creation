@@ -4,8 +4,10 @@ import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/app_text_field.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
 import 'package:baridx_order_creation/core/widgets/text_field_label.dart';
+import 'package:baridx_order_creation/features/order_steps_flow/presentation/cubit/order_steps_cubit.dart';
 import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomerInfoPage extends StatefulWidget {
@@ -27,14 +29,6 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
     phoneController.dispose();
     addressController.dispose();
     super.dispose();
-  }
-
-  void submitCustomerInfo() {
-    final isValid = formKey.currentState?.validate();
-    if (isValid ?? false) {
-      /// TODO: save customer info later when implement bloc logic
-      context.push(Routes.packageDetails);
-    }
   }
 
   @override
@@ -88,12 +82,39 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
             ),
           ),
           const SizedBox(height: Dimensions.padding20Px),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: MainButton(
-              text: "Next",
-              onTap: submitCustomerInfo,
-            ),
+          BlocConsumer<OrderStepsCubit, OrderStepsState>(
+            listener: (context, state) {
+              if (state is CustomerInfoLoaded) {
+                context.push(Routes.packageDetails);
+              }
+            },
+            builder: (context, state) {
+              if (state is CustomerInfoLoading) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: MainButton(
+                    loadingWidget: CircularProgressIndicator(color: Colors.white),
+                    text: "",
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: MainButton(
+                  text: "Next",
+                  onTap: () {
+                    final isValid = formKey.currentState?.validate();
+                    if (isValid ?? false) {
+                      context.read<OrderStepsCubit>().saveCustomerInfo(
+                            name: nameController.text,
+                            phoneNumber: phoneController.text,
+                            address: addressController.text,
+                          );
+                    }
+                  },
+                ),
+              );
+            },
           ),
           const SizedBox(height: Dimensions.padding35Px),
         ],
