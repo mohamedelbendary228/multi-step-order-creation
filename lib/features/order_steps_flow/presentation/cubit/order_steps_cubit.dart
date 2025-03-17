@@ -17,13 +17,25 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
   }) async {
     emit(CustomerInfoLoading());
     await Future.delayed(const Duration(seconds: 2));
-    emit(
-      CustomerInfoLoaded(
-        name: name,
-        phoneNumber: phoneNumber,
-        address: address,
-      ),
-    );
+    emit(CustomerInfoLoaded(
+      name: name,
+      phoneNumber: phoneNumber,
+      address: address,
+    ));
+  }
+
+  Future<void> savePackageDetails({
+    required String packageType,
+    required String weight,
+    String? notes,
+  }) async {
+    emit(PackageDetailsLoading());
+    await Future.delayed(const Duration(seconds: 2));
+    emit(PackageDetailsLoaded(
+      packageType: packageType,
+      weight: weight,
+      notes: notes,
+    ));
   }
 
   void createOrder(OrderParams params) async {

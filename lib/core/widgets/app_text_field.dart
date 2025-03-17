@@ -56,6 +56,9 @@ class AppTextField extends StatelessWidget {
           FocusScope.of(context).requestFocus(nexFocusNode);
         }
       },
+      onTapOutside: (_) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       onChanged: onChanged,
       keyboardType: keyboardType,
       validator: validator,
@@ -76,19 +79,19 @@ class AppTextField extends StatelessWidget {
       cursorHeight: 20.0,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: 8,
+          horizontal: 12,
           vertical: maxLines != null ? 10.0 : 0.0,
         ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(
-          color: const Color(0xFFA3A3A3),
-          fontSize: 10.sp,
+        hintStyle: const TextStyle(
+          color: Color(0xFFA3A3A3),
+          fontSize: 10,
           fontFamily: "Cairo",
         ),
-        errorStyle: TextStyle(
-          fontSize: 10.sp,
+        errorStyle: const TextStyle(
+          fontSize: 10,
           fontFamily: "Cairo",
         ),
         filled: true,
