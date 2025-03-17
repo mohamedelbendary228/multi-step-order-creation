@@ -124,41 +124,24 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
             ),
           ),
           const SizedBox(height: Dimensions.padding20Px),
-          BlocConsumer<OrderStepsCubit, OrderStepsState>(
-            listener: (context, state) {
-              if (state is PackageDetailsLoaded) {
-                context.push(Routes.payment);
-              }
-            },
-            builder: (context, state) {
-              if (state is PackageDetailsLoading) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: MainButton(
-                    loadingWidget: CircularProgressIndicator(color: Colors.white),
-                    text: "",
-                  ),
-                );
-              }
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: MainButton(
-                  text: "Next",
-                  onTap: () {
-                    final isValid = formKey.currentState?.validate();
-                    if ((isValid ?? false) && _selectedPackageType != null) {
-                      context.read<OrderStepsCubit>().savePackageDetails(
-                            packageType: _selectedPackageType!,
-                            weight: weightController.text,
-                            notes: notesController.text.isNotEmpty ? notesController.text : null,
-                          );
-                    } else if (_selectedPackageType == null) {
-                      showToast(message: "Please select a package type");
-                    }
-                  },
-                ),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: MainButton(
+              text: "Next",
+              onTap: () {
+                final isValid = formKey.currentState?.validate();
+                if ((isValid ?? false) && _selectedPackageType != null) {
+                  context.read<OrderStepsCubit>().savePackageDetails(
+                        packageType: _selectedPackageType!,
+                        weight: weightController.text,
+                        notes: notesController.text.isNotEmpty ? notesController.text : null,
+                      );
+                  context.push(Routes.payment);
+                } else if (_selectedPackageType == null) {
+                  showToast(message: "Please select a package type");
+                }
+              },
+            ),
           ),
           const SizedBox(height: Dimensions.padding35Px),
         ],

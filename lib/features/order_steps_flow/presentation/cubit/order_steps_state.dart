@@ -23,42 +23,9 @@ class CreateOrderFailure extends OrderStepsState {
 
 //* Customer Info State
 
-class CustomerInfoLoading extends OrderStepsState {}
+class OrderInfoLoading extends OrderStepsState {}
 
-class CustomerInfoLoaded extends OrderStepsState {
-  final String name;
-  final String phoneNumber;
-  final String address;
-  const CustomerInfoLoaded({
-    required this.name,
-    required this.phoneNumber,
-    required this.address,
-  });
-
-  @override
-  List<Object> get props => [phoneNumber];
-}
-
-class PackageDetailsLoading extends OrderStepsState {}
-
-class PackageDetailsLoaded extends OrderStepsState {
-  final String packageType;
-  final String weight;
-  final String? notes;
-  const PackageDetailsLoaded({
-    required this.packageType,
-    required this.weight,
-    this.notes,
-  });
-}
-
-class PaymentMethodLoading extends OrderStepsState {}
-
-class PaymentMethodLoaded extends OrderStepsState {
-  final String paymentMethod;
-  final String? cardNumber;
-  const PaymentMethodLoaded({
-    required this.paymentMethod,
-    this.cardNumber,
-  });
+class OrderInfoLoaded extends OrderStepsState {
+  final OrderEntity order;
+  const OrderInfoLoaded({required this.order});
 }

@@ -82,39 +82,22 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
             ),
           ),
           const SizedBox(height: Dimensions.padding20Px),
-          BlocConsumer<OrderStepsCubit, OrderStepsState>(
-            listener: (context, state) {
-              if (state is CustomerInfoLoaded) {
-                context.push(Routes.packageDetails);
-              }
-            },
-            builder: (context, state) {
-              if (state is CustomerInfoLoading) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: MainButton(
-                    loadingWidget: CircularProgressIndicator(color: Colors.white),
-                    text: "",
-                  ),
-                );
-              }
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: MainButton(
-                  text: "Next",
-                  onTap: () {
-                    final isValid = formKey.currentState?.validate();
-                    if (isValid ?? false) {
-                      context.read<OrderStepsCubit>().saveCustomerInfo(
-                            name: nameController.text,
-                            phoneNumber: phoneController.text,
-                            address: addressController.text,
-                          );
-                    }
-                  },
-                ),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: MainButton(
+              text: "Next",
+              onTap: () {
+                final isValid = formKey.currentState?.validate();
+                if (isValid ?? false) {
+                  context.read<OrderStepsCubit>().saveCustomerInfo(
+                        name: nameController.text,
+                        phoneNumber: phoneController.text,
+                        address: addressController.text,
+                      );
+                  context.push(Routes.packageDetails);
+                }
+              },
+            ),
           ),
           const SizedBox(height: Dimensions.padding35Px),
         ],

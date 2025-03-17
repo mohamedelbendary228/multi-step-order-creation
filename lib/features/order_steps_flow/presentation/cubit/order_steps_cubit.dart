@@ -1,3 +1,4 @@
+import 'package:baridx_order_creation/features/order_steps_flow/data/models/order_model.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/order.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/domain/usecase/create_order_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -10,18 +11,20 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
       : _createOrderUseCase = createOrderUseCase,
         super(OrderStepsInitial());
 
+  OrderModel order = OrderModel();
+
   Future<void> saveCustomerInfo({
     required String name,
     required String phoneNumber,
     required String address,
   }) async {
-    emit(CustomerInfoLoading());
-    await Future.delayed(const Duration(seconds: 2));
-    emit(CustomerInfoLoaded(
-      name: name,
+    emit(OrderInfoLoading());
+    order = order.copyWith(
+      customerName: name,
       phoneNumber: phoneNumber,
       address: address,
-    ));
+    );
+    emit(OrderInfoLoaded(order: order));
   }
 
   Future<void> savePackageDetails({
@@ -29,25 +32,25 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
     required String weight,
     String? notes,
   }) async {
-    emit(PackageDetailsLoading());
-    await Future.delayed(const Duration(seconds: 2));
-    emit(PackageDetailsLoaded(
+    emit(OrderInfoLoading());
+    order = order.copyWith(
       packageType: packageType,
       weight: weight,
       notes: notes,
-    ));
+    );
+    emit(OrderInfoLoaded(order: order));
   }
 
   Future<void> savePaymentMethodDetails({
     required String paymentMethod,
     String? cardNumber,
   }) async {
-    emit(PaymentMethodLoading());
-    await Future.delayed(const Duration(seconds: 2));
-    emit(PaymentMethodLoaded(
+    emit(OrderInfoLoading());
+    order = order.copyWith(
       paymentMethod: paymentMethod,
       cardNumber: cardNumber,
-    ));
+    );
+    emit(OrderInfoLoaded(order: order));
   }
 
   void createOrder(OrderParams params) async {
@@ -57,11 +60,5 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
       (failure) => emit(CreateOrderFailure(message: failure.message)),
       (order) => emit(CreateOrderLoaded(order: order)),
     );
-  }
-
-  @override
-  void onChange(Change<OrderStepsState> change) {
-    super.onChange(change);
-    print("OrderStepsCubit $change");
   }
 }

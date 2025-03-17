@@ -97,38 +97,21 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
           ),
           const SizedBox(height: Dimensions.padding20Px),
-          BlocConsumer<OrderStepsCubit, OrderStepsState>(
-            listener: (context, state) {
-              if (state is PaymentMethodLoaded) {
-                //context.push(Routes.reviewOrder);
-              }
-            },
-            builder: (context, state) {
-              if (state is PaymentMethodLoading) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: MainButton(
-                    loadingWidget: CircularProgressIndicator(color: Colors.white),
-                    text: "",
-                  ),
-                );
-              }
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: MainButton(
-                  text: "Next",
-                  onTap: () {
-                    context.read<OrderStepsCubit>().savePaymentMethodDetails(
-                          paymentMethod: _selectedPaymentType.paymentType,
-                          cardNumber: ((cardNumber?.isNotEmpty ?? false) &&
-                                  _selectedPaymentType == PaymentMethodType.creditCard)
-                              ? cardNumber!
-                              : null,
-                        );
-                  },
-                ),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: MainButton(
+              text: "Next",
+              onTap: () {
+                context.read<OrderStepsCubit>().savePaymentMethodDetails(
+                      paymentMethod: _selectedPaymentType.paymentType,
+                      cardNumber: ((cardNumber?.isNotEmpty ?? false) &&
+                              _selectedPaymentType == PaymentMethodType.creditCard)
+                          ? cardNumber!
+                          : null,
+                    );
+                context.push(Routes.reviewOrder);
+              },
+            ),
           ),
           const SizedBox(height: Dimensions.padding35Px),
         ],
