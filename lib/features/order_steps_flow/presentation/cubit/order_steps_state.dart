@@ -51,3 +51,14 @@ class PackageDetailsLoaded extends OrderStepsState {
     this.notes,
   });
 }
+
+class PaymentMethodLoading extends OrderStepsState {}
+
+class PaymentMethodLoaded extends OrderStepsState {
+  final String paymentMethod;
+  final String? cardNumber;
+  const PaymentMethodLoaded({
+    required this.paymentMethod,
+    this.cardNumber,
+  });
+}

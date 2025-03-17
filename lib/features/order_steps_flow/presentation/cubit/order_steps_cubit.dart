@@ -38,6 +38,18 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
     ));
   }
 
+  Future<void> savePaymentMethodDetails({
+    required String paymentMethod,
+    String? cardNumber,
+  }) async {
+    emit(PaymentMethodLoading());
+    await Future.delayed(const Duration(seconds: 2));
+    emit(PaymentMethodLoaded(
+      paymentMethod: paymentMethod,
+      cardNumber: cardNumber,
+    ));
+  }
+
   void createOrder(OrderParams params) async {
     emit(CreateOrderLoading());
     final result = await _createOrderUseCase(params);

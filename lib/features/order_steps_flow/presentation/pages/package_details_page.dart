@@ -1,7 +1,7 @@
 import 'package:baridx_order_creation/core/constants/dimensions.dart';
 import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/utils/text_input_validators.dart';
-import 'package:baridx_order_creation/core/utils/utils.dart';
+import 'package:baridx_order_creation/core/utils/toast.dart';
 import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/app_text_field.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
@@ -150,7 +150,7 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
                       context.read<OrderStepsCubit>().savePackageDetails(
                             packageType: _selectedPackageType!,
                             weight: weightController.text,
-                            notes: notesController.text,
+                            notes: notesController.text.isNotEmpty ? notesController.text : null,
                           );
                     } else if (_selectedPackageType == null) {
                       showToast(message: "Please select a package type");

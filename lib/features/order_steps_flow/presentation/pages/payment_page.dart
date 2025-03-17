@@ -1,11 +1,16 @@
 import 'package:baridx_order_creation/core/constants/dimensions.dart';
 import 'package:baridx_order_creation/core/enums/payment_mehtod_type.dart';
 import 'package:baridx_order_creation/core/resources/app_assets.dart';
+import 'package:baridx_order_creation/core/utils/extensions.dart';
 import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
+import 'package:baridx_order_creation/features/order_steps_flow/presentation/cubit/order_steps_cubit.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/widgets/credit_card_bottom_sheet.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/widgets/payment_type_card_widget.dart';
+import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -92,12 +97,38 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
           ),
           const SizedBox(height: Dimensions.padding20Px),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: MainButton(
-              text: "Next",
-              onTap: () {},
-            ),
+          BlocConsumer<OrderStepsCubit, OrderStepsState>(
+            listener: (context, state) {
+              if (state is PaymentMethodLoaded) {
+                //context.push(Routes.reviewOrder);
+              }
+            },
+            builder: (context, state) {
+              if (state is PaymentMethodLoading) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: MainButton(
+                    loadingWidget: CircularProgressIndicator(color: Colors.white),
+                    text: "",
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: MainButton(
+                  text: "Next",
+                  onTap: () {
+                    context.read<OrderStepsCubit>().savePaymentMethodDetails(
+                          paymentMethod: _selectedPaymentType.paymentType,
+                          cardNumber: ((cardNumber?.isNotEmpty ?? false) &&
+                                  _selectedPaymentType == PaymentMethodType.creditCard)
+                              ? cardNumber!
+                              : null,
+                        );
+                  },
+                ),
+              );
+            },
           ),
           const SizedBox(height: Dimensions.padding35Px),
         ],
