@@ -1,11 +1,11 @@
-import 'package:baridx_order_creation/features/order_steps_flow/data/models/order_model.dart';
-import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/order.dart';
+import 'package:baridx_order_creation/core/models/order_model.dart';
+import 'package:baridx_order_creation/core/entities/order.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 abstract interface class OrderRemoteDataSource {
   Future<OrderModel> createOrder(OrderEntity order);
-  void storeLocalOrder(OrderModel order);
+  void storeLocalOrder(List<OrderModel> orders);
 }
 
 class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
@@ -31,9 +31,11 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   }
 
   @override
-  void storeLocalOrder(OrderModel order) {
+  void storeLocalOrder(List<OrderModel> orders) {
     box.write(() {
-      box.put(order.id ?? "", order.toJson());
+      for (int i = 0; i < orders.length; i++) {
+        box.put(i.toString(), orders[i].toJson());
+      }
     });
   }
 }

@@ -1,3 +1,8 @@
+import 'package:baridx_order_creation/features/home/data/datasource/home_local_datasource.dart';
+import 'package:baridx_order_creation/features/home/data/respository/home_repository_impl.dart';
+import 'package:baridx_order_creation/features/home/domain/respository/home_respository.dart';
+import 'package:baridx_order_creation/features/home/domain/uscase/get_orders_usecase.dart';
+import 'package:baridx_order_creation/features/home/presentation/cubit/home_cubit.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/data/datasource/order_steps_datasource.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/data/respository/order_steps_repository_impl.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/domain/repository/order_steps_repository.dart';
@@ -9,11 +14,16 @@ import 'package:path_provider/path_provider.dart';
 
 final serviceLocator = GetIt.instance;
 Future<void> setupLocator() async {
+  //* hive
   Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
-
   serviceLocator.registerLazySingleton(() => Hive.box(name: 'orders'));
 
-  //* bloc
+  _setupOrderStepsFlow();
+  _setUpHome();
+}
+
+void _setupOrderStepsFlow() {
+//* cubit
   serviceLocator.registerFactory(() => OrderStepsCubit(serviceLocator()));
 
   //* usecase
@@ -28,5 +38,23 @@ Future<void> setupLocator() async {
   //* data source
   serviceLocator.registerLazySingleton<OrderRemoteDataSource>(
     () => OrderRemoteDataSourceImpl(box: serviceLocator()),
+  );
+}
+
+void _setUpHome() {
+  //* cubit
+  serviceLocator.registerFactory(() => HomeCubit(serviceLocator()));
+
+  //* usecase
+  serviceLocator.registerLazySingleton(() => GetOrdersUseCase(homeRepository: serviceLocator()));
+
+  //* repository
+  serviceLocator.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(homeLocalDataSource: serviceLocator()),
+  );
+
+  //* data source
+  serviceLocator.registerLazySingleton<HomeLocalDataSource>(
+    () => HomeLocalDataSourceImpl(box: serviceLocator()),
   );
 }

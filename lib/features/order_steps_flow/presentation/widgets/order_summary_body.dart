@@ -1,6 +1,6 @@
 import 'package:baridx_order_creation/core/constants/dimensions.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
-import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/order.dart';
+import 'package:baridx_order_creation/core/entities/order.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/widgets/review_item.dart';
 import 'package:flutter/material.dart';
 

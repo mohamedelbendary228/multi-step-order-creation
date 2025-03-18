@@ -1,4 +1,5 @@
 import 'package:baridx_order_creation/core/resources/app_theme.dart';
+import 'package:baridx_order_creation/features/home/presentation/cubit/home_cubit.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/cubit/order_steps_cubit.dart';
 import 'package:baridx_order_creation/injection_contianer.dart';
 import 'package:baridx_order_creation/routes/router.dart';
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => serviceLocator<OrderStepsCubit>(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<HomeCubit>(),
+        ),
       ],
       child: ScreenUtilInit(
           useInheritedMediaQuery: true,

@@ -1,5 +1,5 @@
-import 'package:baridx_order_creation/features/order_steps_flow/data/models/order_model.dart';
-import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/order.dart';
+import 'package:baridx_order_creation/core/models/order_model.dart';
+import 'package:baridx_order_creation/core/entities/order.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/domain/usecase/create_order_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
