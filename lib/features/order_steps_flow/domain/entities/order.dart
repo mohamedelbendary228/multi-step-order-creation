@@ -1,4 +1,5 @@
 class OrderEntity {
+  final String? id;
   final String? customerName;
   final String? phoneNumber;
   final String? address;
@@ -9,6 +10,7 @@ class OrderEntity {
   final String? cardNumber;
 
   OrderEntity({
+    this.id,
     this.customerName,
     this.phoneNumber,
     this.address,

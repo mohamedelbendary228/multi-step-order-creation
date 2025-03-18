@@ -2,6 +2,7 @@ import 'package:baridx_order_creation/features/order_steps_flow/domain/entities/
 
 class OrderModel extends OrderEntity {
   OrderModel({
+    super.id,
     super.customerName,
     super.phoneNumber,
     super.address,
@@ -14,6 +15,7 @@ class OrderModel extends OrderEntity {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
+      id: json['id'],
       customerName: json['customerName'],
       phoneNumber: json['phoneNumber'],
       address: json['address'],
@@ -27,6 +29,7 @@ class OrderModel extends OrderEntity {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'customerName': customerName,
       'phoneNumber': phoneNumber,
       'address': address,
@@ -39,6 +42,7 @@ class OrderModel extends OrderEntity {
   }
 
   OrderModel copyWith({
+    String? id,
     String? customerName,
     String? phoneNumber,
     String? address,
@@ -49,6 +53,7 @@ class OrderModel extends OrderEntity {
     String? cardNumber,
   }) {
     return OrderModel(
+      id: id ?? this.id,
       customerName: customerName ?? this.customerName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       address: address ?? this.address,
@@ -61,6 +66,7 @@ class OrderModel extends OrderEntity {
   }
 
   OrderEntity toEntity() => OrderEntity(
+        id: id,
         customerName: customerName,
         phoneNumber: phoneNumber,
         address: address,
@@ -70,4 +76,19 @@ class OrderModel extends OrderEntity {
         paymentMethod: paymentMethod,
         cardNumber: cardNumber,
       );
+
+  @override
+  String toString() {
+    return 'OrderModel{'
+        'id: $id, '
+        'customerName: $customerName, '
+        'phoneNumber: $phoneNumber, '
+        'address: $address, '
+        'packageType: $packageType, '
+        'weight: $weight, '
+        'notes: $notes, '
+        'paymentMethod: $paymentMethod, '
+        'cardNumber: $cardNumber, '
+        '}';
+  }
 }

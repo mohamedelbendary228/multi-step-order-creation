@@ -14,6 +14,7 @@ class OrderStepsRepositoryImpl implements OrderStepsRepository {
   Future<Either<Failure, OrderEntity>> createOrder(OrderModel order) async {
     try {
       final result = await orderRemoteDataSource.createOrder(order);
+      orderRemoteDataSource.storeLocalOrder(result);
       return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure('An error has occurred'));
