@@ -27,6 +27,7 @@ dependencies:
   fluttertoast: ^8.2.12
   flutter_credit_card: ^4.1.0
   equatable: ^2.0.7
+  flutter_svg: ^2.0.11
   
 
   

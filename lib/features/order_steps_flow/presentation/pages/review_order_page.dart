@@ -3,8 +3,10 @@ import 'package:baridx_order_creation/core/widgets/app_headr.dart';
 import 'package:baridx_order_creation/core/widgets/main_button.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/cubit/order_steps_cubit.dart';
 import 'package:baridx_order_creation/features/order_steps_flow/presentation/widgets/review_item.dart';
+import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ReviewOrderPage extends StatelessWidget {
   const ReviewOrderPage({super.key});
@@ -59,7 +61,9 @@ class ReviewOrderPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: MainButton(
               text: "Checkout",
-              onTap: () {},
+              onTap: () async {
+                context.go(Routes.success);
+              },
             ),
           ),
           const SizedBox(height: Dimensions.padding35Px),
