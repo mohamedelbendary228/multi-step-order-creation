@@ -38,10 +38,11 @@ class OrderCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppDefaultText(
-            "#$orderId",
-            fontSize: 14,
+            "# $orderId",
+            fontSize: 12,
             fontWeight: FontWeight.w600,
             height: 1.2,
+            color: AppColors.primaryColor,
           ),
           AppDefaultText(
             customerName,

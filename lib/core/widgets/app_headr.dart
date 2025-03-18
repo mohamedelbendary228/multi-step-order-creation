@@ -1,4 +1,5 @@
 import 'package:baridx_order_creation/core/resources/app_assets.dart';
+import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,7 @@ class AppHeader extends StatelessWidget {
         Image.asset(
           AppAssets.appBarHeader,
           width: MediaQuery.sizeOf(context).width,
+          color: AppColors.primaryColor,
         ),
         Positioned(
           top: 55,

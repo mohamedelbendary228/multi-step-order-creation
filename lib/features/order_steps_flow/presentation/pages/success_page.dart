@@ -1,5 +1,6 @@
 import 'package:baridx_order_creation/core/constants/dimensions.dart';
 import 'package:baridx_order_creation/core/resources/app_assets.dart';
+import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
 import 'package:baridx_order_creation/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,10 @@ class _SuccessPageState extends State<SuccessPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(AppAssets.successIcon),
+              SvgPicture.asset(
+                AppAssets.successIcon,
+                color: AppColors.primaryColor,
+              ),
               const SizedBox(height: Dimensions.padding20Px),
               const AppDefaultText(
                 "Order Created Successfully",
