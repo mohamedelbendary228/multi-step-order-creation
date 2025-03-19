@@ -66,4 +66,9 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
       (order) => emit(CreateOrderLoaded(order: order)),
     );
   }
+
+  /// reset the order model after creating an order
+  void resetData() {
+    order = OrderModel();
+  }
 }
