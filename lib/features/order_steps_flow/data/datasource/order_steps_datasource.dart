@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 
 abstract interface class OrderRemoteDataSource {
   Future<OrderModel> createOrder(OrderEntity order);
-  void storeLocalOrder(List<OrderModel> orders);
+  void storeLocalOrder(OrderModel orders);
 }
 
 class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
@@ -30,12 +30,14 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     return OrderModel.fromJson(orderJson);
   }
 
+  //* Here you can find that I write a list of orders in hive using to json method
+  //* And also I read the data using the from json method
+  //* This list will contain only one item every time, The last order created
+  //* beacuse
   @override
-  void storeLocalOrder(List<OrderModel> orders) {
+  void storeLocalOrder(OrderModel orders) {
     box.write(() {
-      for (int i = 0; i < orders.length; i++) {
-        box.put(i.toString(), orders[i].toJson());
-      }
+      box.add(orders.toJson());
     });
   }
 }

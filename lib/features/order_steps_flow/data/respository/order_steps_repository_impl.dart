@@ -10,14 +10,15 @@ class OrderStepsRepositoryImpl implements OrderStepsRepository {
   final OrderRemoteDataSource orderRemoteDataSource;
 
   OrderStepsRepositoryImpl({required this.orderRemoteDataSource});
+
+  //* - Here you can find the implementation of the OrderStepsRepository.
+  //* - This method is used to create an order and return and entity or a failure.
+  //* - After creating the order, the order is stored in the local database.
   @override
   Future<Either<Failure, OrderEntity>> createOrder(OrderModel order) async {
     try {
       final result = await orderRemoteDataSource.createOrder(order);
-      final List<OrderModel> orders = [];
-      orders.clear();
-      orders.add(result);
-      orderRemoteDataSource.storeLocalOrder(orders);
+      orderRemoteDataSource.storeLocalOrder(result);
       return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure('An error has occurred'));

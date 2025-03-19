@@ -38,24 +38,27 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          const AppHeader(text: "Your Order"),
+          const AppHeader(text: "Orders"),
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is HomeLoaded) {
-                final List<OrderEntity> orders = state.orders;
+                //* initialize orders list with reversed order to view the latest created orders first
+                final List<OrderEntity> orders = state.orders.reversed.toList();
                 return orders.isNotEmpty
                     ? Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              OrderCardWidget(
-                                orderId: orders[0].id ?? "",
-                                customerName: orders[0].customerName ?? "",
-                                address: orders[0].address ?? "",
-                                paymentMethod: orders[0].paymentMethod ?? "",
-                              )
-                            ],
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: orders.length,
+                            itemBuilder: (context, index) {
+                              return OrderCardWidget(
+                                orderId: orders[index].id ?? "",
+                                customerName: orders[index].customerName ?? "",
+                                address: orders[index].address ?? "",
+                                paymentMethod: orders[index].paymentMethod ?? "",
+                              );
+                            },
                           ),
                         ),
                       )

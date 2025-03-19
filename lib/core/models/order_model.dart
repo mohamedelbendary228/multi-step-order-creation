@@ -13,6 +13,9 @@ class OrderModel extends OrderEntity {
     super.notes,
   });
 
+  //* fromJson method, converts a JSON map to an OrderModel object.
+  //* I use to read the data from hive
+  //* And return an OrderModel object when creating an order
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
       id: json['id'],
@@ -27,6 +30,8 @@ class OrderModel extends OrderEntity {
     );
   }
 
+  //* toJson method, converts the OrderModel object to a JSON map.
+  //* I use to to write the data locally in hive
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -41,6 +46,8 @@ class OrderModel extends OrderEntity {
     };
   }
 
+  //* copyWith method, creates a new copy of the OrderModel object with optional updated properties.
+  //* If a property is not provided, it defaults to the original value.
   OrderModel copyWith({
     String? id,
     String? customerName,
