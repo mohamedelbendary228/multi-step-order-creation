@@ -1,18 +1,23 @@
 import 'package:baridx_order_creation/core/resources/app_colors.dart';
 import 'package:baridx_order_creation/core/widgets/app_deafult_text.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OrderCardWidget extends StatelessWidget {
   final String orderId;
-  final String customerName;
   final String address;
   final String paymentMethod;
+  final String createdDate;
+  final String packageType;
+  final String weight;
   const OrderCardWidget({
     super.key,
-    required this.customerName,
     required this.address,
     required this.paymentMethod,
     required this.orderId,
+    required this.createdDate,
+    required this.packageType,
+    required this.weight,
   });
 
   @override
@@ -37,32 +42,45 @@ class OrderCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(width: 10),
           AppDefaultText(
-            "# $orderId",
+            "Order# $orderId",
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            height: 1.2,
-            color: AppColors.primaryColor,
+            color: AppColors.naturalDarkGray,
           ),
           AppDefaultText(
-            customerName,
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
+            DateFormat('yMMMEd').format(DateTime.parse(createdDate)),
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: AppColors.darkGray,
+            height: 1.1,
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           AppDefaultText(
             address,
             fontSize: 10,
             fontWeight: FontWeight.w500,
-            color: AppColors.naturalDarkGray,
+            color: AppColors.darkGray,
             height: 1.2,
           ),
           const SizedBox(height: 5),
-          AppDefaultText(
-            paymentMethod,
-            fontSize: 8,
-            fontWeight: FontWeight.w500,
-            color: AppColors.naturalDarkGray,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppDefaultText(
+                "$packageType, $weight Kg",
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: AppColors.blackColor,
+              ),
+              AppDefaultText(
+                paymentMethod,
+                fontSize: 8,
+                fontWeight: FontWeight.w600,
+                color: AppColors.blackColor,
+              ),
+            ],
           ),
         ],
       ),

@@ -1,7 +1,6 @@
 import 'package:baridx_order_creation/core/models/order_model.dart';
 import 'package:baridx_order_creation/core/entities/order.dart';
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 abstract interface class OrderRemoteDataSource {
   Future<OrderModel> createOrder(OrderEntity order);
@@ -17,7 +16,8 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   Future<OrderModel> createOrder(OrderEntity order) async {
     await Future.delayed(const Duration(seconds: 2));
     final Map<String, dynamic> orderJson = {
-      'id': const Uuid().v1(),
+      'id': DateTime.now().millisecondsSinceEpoch.toString(),
+      'createdDate': DateTime.now().toIso8601String().toString(),
       'customerName': order.customerName,
       'phoneNumber': order.phoneNumber,
       'address': order.address,

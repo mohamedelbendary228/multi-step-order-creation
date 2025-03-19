@@ -3,6 +3,7 @@ import 'package:baridx_order_creation/core/entities/order.dart';
 class OrderModel extends OrderEntity {
   OrderModel({
     super.id,
+    super.createdDate,
     super.customerName,
     super.phoneNumber,
     super.address,
@@ -19,6 +20,7 @@ class OrderModel extends OrderEntity {
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
       id: json['id'],
+      createdDate: json['createdDate'],
       customerName: json['customerName'],
       phoneNumber: json['phoneNumber'],
       address: json['address'],
@@ -35,6 +37,7 @@ class OrderModel extends OrderEntity {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'createdDate': createdDate,
       'customerName': customerName,
       'phoneNumber': phoneNumber,
       'address': address,
@@ -50,6 +53,7 @@ class OrderModel extends OrderEntity {
   //* If a property is not provided, it defaults to the original value.
   OrderModel copyWith({
     String? id,
+    String? createdDate,
     String? customerName,
     String? phoneNumber,
     String? address,
@@ -61,6 +65,7 @@ class OrderModel extends OrderEntity {
   }) {
     return OrderModel(
       id: id ?? this.id,
+      createdDate: createdDate ?? this.createdDate,
       customerName: customerName ?? this.customerName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       address: address ?? this.address,
@@ -74,6 +79,7 @@ class OrderModel extends OrderEntity {
 
   OrderEntity toEntity() => OrderEntity(
         id: id,
+        createdDate: createdDate,
         customerName: customerName,
         phoneNumber: phoneNumber,
         address: address,
@@ -88,6 +94,7 @@ class OrderModel extends OrderEntity {
   String toString() {
     return 'OrderModel{'
         'id: $id, '
+        'createdDate: $createdDate, '
         'customerName: $customerName, '
         'phoneNumber: $phoneNumber, '
         'address: $address, '

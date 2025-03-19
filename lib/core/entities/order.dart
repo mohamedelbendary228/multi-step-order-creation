@@ -1,5 +1,6 @@
 class OrderEntity {
   final String? id;
+  final String? createdDate;
   final String? customerName;
   final String? phoneNumber;
   final String? address;
@@ -11,6 +12,7 @@ class OrderEntity {
 
   OrderEntity({
     this.id,
+    this.createdDate,
     this.customerName,
     this.phoneNumber,
     this.address,

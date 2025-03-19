@@ -54,9 +54,11 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context, index) {
                               return OrderCardWidget(
                                 orderId: orders[index].id ?? "",
-                                customerName: orders[index].customerName ?? "",
+                                createdDate: orders[index].createdDate ?? "",
                                 address: orders[index].address ?? "",
                                 paymentMethod: orders[index].paymentMethod ?? "",
+                                packageType: orders[index].packageType ?? "",
+                                weight: orders[index].weight ?? "",
                               );
                             },
                           ),
