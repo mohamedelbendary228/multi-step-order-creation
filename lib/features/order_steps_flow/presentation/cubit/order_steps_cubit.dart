@@ -11,6 +11,9 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
       : _createOrderUseCase = createOrderUseCase,
         super(OrderStepsInitial());
 
+  /// Initial order model to update the state of every step using [copyWith] method
+  /// by this we can update the state of the order model without losing the data
+  /// And view it in review page
   OrderModel order = OrderModel();
 
   Future<void> saveCustomerInfo({
@@ -53,6 +56,8 @@ class OrderStepsCubit extends Cubit<OrderStepsState> {
     emit(OrderInfoLoaded(order: order));
   }
 
+  /// use this method to when tap on checkout button
+  /// in [ReviewOrderPage]
   void createOrder(OrderParams params) async {
     emit(CreateOrderLoading());
     final result = await _createOrderUseCase(params);

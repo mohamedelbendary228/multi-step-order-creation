@@ -21,7 +21,7 @@ class CreateOrderFailure extends OrderStepsState {
   const CreateOrderFailure({required this.message});
 }
 
-//* Customer Info State
+/// states of order steps
 
 class OrderInfoLoading extends OrderStepsState {}
 
